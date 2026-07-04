@@ -15,7 +15,13 @@ def index():
 @app.route("/wake")
 def wake():
     try:
-        print(f"Waking Studio: {STUDIO_NAME}")
+        print(f"Debug - STUDIO_NAME: {STUDIO_NAME}")
+        print(f"Debug - TEAMSPACE: {TEAMSPACE}")
+        print(f"Debug - ORG: {ORG}")
+        
+        if not STUDIO_NAME:
+            return jsonify({"status": "error", "message": "STUDIO_NAME not set"}), 500
+        
         studio = Studio(name=STUDIO_NAME, teamspace=TEAMSPACE, org=ORG)
         studio.start()
         return jsonify({"status": "success", "message": "Studio started"})
