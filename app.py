@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 STUDIO_NAME = os.environ.get("STUDIO_NAME")
 TEAMSPACE = os.environ.get("TEAMSPACE", "default")
-USERNAME = os.environ.get("USERNAME")
+ORG = os.environ.get("ORG")
 
 @app.route("/")
 def index():
@@ -16,7 +16,7 @@ def index():
 def wake():
     try:
         print(f"Waking Studio: {STUDIO_NAME}")
-        studio = Studio(name=STUDIO_NAME, teamspace=TEAMSPACE, user=USERNAME)
+        studio = Studio(name=STUDIO_NAME, teamspace=TEAMSPACE, org=ORG)
         studio.start()
         return jsonify({"status": "success", "message": "Studio started"})
     except Exception as e:
